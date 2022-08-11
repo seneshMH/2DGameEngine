@@ -25,4 +25,5 @@ hs_err_pid*
 mario/.gradle
 mario/.idea
 mario/gradle
+mario/build
 
