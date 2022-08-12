@@ -1,5 +1,6 @@
 package jade;
 
+import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import renderer.Shader;
 
@@ -35,6 +36,8 @@ public class LevelEditorScene extends Scene{
 
     @Override
     public void init(){
+        this.camera = new Camera(new Vector2f());
+
         defaultShader = new Shader("assets/shaders/default.glsl");
         defaultShader.compile();
 
@@ -77,6 +80,8 @@ public class LevelEditorScene extends Scene{
 
         //Bind Shader program
         defaultShader.use();
+        defaultShader.uploadMat4f("uProjection",camera.getProjectionMatrix());
+        defaultShader.uploadMat4f("uview",camera.getViewMatrix());
 
         //bind vao
         glBindVertexArray(vaoID);
