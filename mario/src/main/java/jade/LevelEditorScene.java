@@ -3,6 +3,7 @@ package jade;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import renderer.Shader;
+import util.Time;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -81,7 +82,9 @@ public class LevelEditorScene extends Scene{
         //Bind Shader program
         defaultShader.use();
         defaultShader.uploadMat4f("uProjection",camera.getProjectionMatrix());
-        defaultShader.uploadMat4f("uview",camera.getViewMatrix());
+        defaultShader.uploadMat4f("uView",camera.getViewMatrix());
+
+        defaultShader.uploadFlot("uTime", Time.getTime());
 
         //bind vao
         glBindVertexArray(vaoID);
