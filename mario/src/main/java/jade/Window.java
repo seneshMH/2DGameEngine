@@ -33,12 +33,14 @@ public class Window {
             {
                currentScene = new LevelEditorScene();
                currentScene.init();
+               currentScene.start();
                 break;
             }
             case 1:
             {
                 currentScene = new LevelScene();
                 currentScene.init();
+                currentScene.start();
                 break;
             }
             default:
@@ -55,6 +57,10 @@ public class Window {
         }
 
         return Window.window;
+    }
+
+    public static Scene getScene(){
+        return get().currentScene;
     }
 
     public void run(){
@@ -133,6 +139,7 @@ public class Window {
 
             if(dt >= 0)
                 currentScene.update(dt);
+                glfwSetWindowTitle(glfwWindow,title + " FPS : " + Math.round(1.0f / dt));
 
             glfwSwapBuffers(glfwWindow);
 
