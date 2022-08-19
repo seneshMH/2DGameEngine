@@ -59,6 +59,10 @@ public class Window {
         return Window.window;
     }
 
+    public static Scene getScene(){
+        return get().currentScene;
+    }
+
     public void run(){
         System.out.println("Hello LWJGL " + Version.getVersion() + "!");
 
@@ -135,6 +139,7 @@ public class Window {
 
             if(dt >= 0)
                 currentScene.update(dt);
+                glfwSetWindowTitle(glfwWindow,title + " FPS : " + Math.round(1.0f / dt));
 
             glfwSwapBuffers(glfwWindow);
 
