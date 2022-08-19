@@ -1,5 +1,6 @@
 package jade;
 
+import components.SpriteRenderer;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import renderer.Shader;
@@ -17,6 +18,8 @@ public class LevelEditorScene extends Scene{
     
     private Shader defaultShader;
     private Texture testTexture;
+
+    GameObject testObj;
 
     private float[] vertexArray = {
         //position          //color                   //UV
@@ -39,6 +42,10 @@ public class LevelEditorScene extends Scene{
 
     @Override
     public void init(){
+        this.testObj = new GameObject("test");
+        this.testObj.addComponent(new SpriteRenderer());
+        this.addGameObjectToScene(this.testObj);
+
         this.camera = new Camera(new Vector2f());
 
         defaultShader = new Shader("assets/shaders/default.glsl");
@@ -112,6 +119,10 @@ public class LevelEditorScene extends Scene{
         glBindVertexArray(0);
 
         defaultShader.detach();
+
+        for (GameObject go : this.gameObjects){
+            go.update(dt);
+        }
     }
 
 
