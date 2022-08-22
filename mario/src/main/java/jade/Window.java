@@ -21,6 +21,8 @@ public class Window {
 
     private long glfwWindow;
 
+    private ImGuiLayer imGuiLayer;
+
     private Window(){
         this.width  =1920;
         this.height = 1080;
@@ -109,6 +111,11 @@ public class Window {
         glfwSetScrollCallback(glfwWindow,MouseListener::mouseScrollCallback);
         glfwSetKeyCallback(glfwWindow,KeyListener::keyCallback);
 
+        glfwSetWindowSizeCallback(glfwWindow,(w,newWidth,newHeight) -> {
+            Window.setWidth(newWidth);
+            Window.setHeight(newHeight);
+        });
+
 
         //Make the OPENGL context current
         glfwMakeContextCurrent(glfwWindow);
@@ -119,6 +126,11 @@ public class Window {
         glfwShowWindow(glfwWindow);
 
         GL.createCapabilities();
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+
+        this.imGuiLayer = new ImGuiLayer(glfwWindow);
+        this.imGuiLayer.initImGui();
 
         window.changeScene(0);
 
@@ -137,9 +149,12 @@ public class Window {
             glClearColor(1.0f,1.0f,1.0f,1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if(dt >= 0)
+            if(dt >= 0) {
                 currentScene.update(dt);
-                glfwSetWindowTitle(glfwWindow,title + " FPS : " + Math.round(1.0f / dt));
+                glfwSetWindowTitle(glfwWindow, title + " FPS : " + Math.round(1.0f / dt));
+            }
+
+            this.imGuiLayer.update(dt,currentScene);
 
             glfwSwapBuffers(glfwWindow);
 
@@ -148,4 +163,22 @@ public class Window {
             beginTime = endTime;
         }
     }
+
+    public static int getWidth(){
+        return get().width;
+    }
+
+    public static int getHeight(){
+        return get().height;
+    }
+
+    public static void setWidth(int newWidth){
+        get().width =newWidth;
+    }
+
+    public static void setHeight(int newHeight) {
+        get().height = newHeight;
+    }
+
+
 }
