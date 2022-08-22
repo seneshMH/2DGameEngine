@@ -154,7 +154,7 @@ public class Window {
                 glfwSetWindowTitle(glfwWindow, title + " FPS : " + Math.round(1.0f / dt));
             }
 
-            this.imGuiLayer.update(dt);
+            this.imGuiLayer.update(dt,currentScene);
 
             glfwSwapBuffers(glfwWindow);
 
