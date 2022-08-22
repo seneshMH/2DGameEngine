@@ -103,8 +103,21 @@ public class RenderBatch {
     }
 
     public void render(){
-        glBindBuffer(GL_ARRAY_BUFFER,vboID);
-        glBufferSubData(GL_ARRAY_BUFFER,0,vertices);
+
+        boolean reBufferData = false;
+        for (int i =0;i < numSprites;i++){
+            SpriteRenderer spr = sprites[i];
+            if(spr.isDirty()){
+                loadVertexProperties(i);
+                spr.setClear();
+                reBufferData = true;
+            }
+        }
+
+        if(reBufferData){
+            glBindBuffer(GL_ARRAY_BUFFER,vboID);
+            glBufferSubData(GL_ARRAY_BUFFER,0,vertices);
+        }
 
         shader.use();
         shader.uploadMat4f("uProjection", Window.getScene().camera().getProjectionMatrix());
