@@ -1,14 +1,12 @@
 package scenes;
 
 
-import components.RigidBody;
-import components.Sprite;
-import components.SpriteRenderer;
-import components.SpriteSheet;
+import components.*;
 import imgui.ImGui;
 import imgui.ImVec2;
 import jade.Camera;
 import jade.GameObject;
+import jade.Prefabs;
 import jade.Transform;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
@@ -20,6 +18,8 @@ public class LevelEditorScene extends Scene {
     GameObject obj1;
     GameObject obj2;
     SpriteSheet sprites;
+
+    MouseControls mouseControls = new MouseControls();
 
     public LevelEditorScene(){
 
@@ -70,6 +70,7 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void update(float dt) {
+        mouseControls.update(dt);
 
         for (GameObject go : this.gameObjects){
             go.update(dt);
@@ -100,7 +101,8 @@ public class LevelEditorScene extends Scene {
 
             ImGui.pushID(i);
             if(ImGui.imageButton(id,spriteWidth,spriteHeight,texCoords[0].x,texCoords[0].y,texCoords[2].x,texCoords[2].y)){
-                //
+                GameObject object = Prefabs.generateSpriteObjects(sprite,spriteWidth,spriteHeight);
+                mouseControls.pickupObject(object);
             }
             ImGui.popID();
 
