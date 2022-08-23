@@ -1,19 +1,21 @@
-package jade;
+package scenes;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import components.RigidBody;
 import components.Sprite;
 import components.SpriteRenderer;
 import components.SpriteSheet;
 import imgui.ImGui;
 import imgui.ImVec2;
+import jade.Camera;
+import jade.GameObject;
+import jade.Transform;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
+import scenes.Scene;
 import util.AssetPool;
 
-public class LevelEditorScene extends Scene{
+public class LevelEditorScene extends Scene {
 
     GameObject obj1;
     GameObject obj2;
