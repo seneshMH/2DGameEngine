@@ -139,10 +139,13 @@ public class Window {
         this.imGuiLayer.initImGui();
 
         this.frameBuffer = new FrameBuffer(1920,1080);
+        glViewport(0,0,1920,1080);
 
         window.changeScene(0);
 
     }
+
+
 
     public void loop(){
 
@@ -157,10 +160,12 @@ public class Window {
 
             DebugDraw.beginFrame();
 
+            this.frameBuffer.bind();
+
             glClearColor(1.0f,1.0f,1.0f,1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            //this.frameBuffer.bind();
+
 
             if(dt >= 0) {
                 DebugDraw.draw();
@@ -198,4 +203,11 @@ public class Window {
     }
 
 
+    public static FrameBuffer getFrameBuffer() {
+        return get().frameBuffer;
+    }
+
+    public static float getTargetAspectRatio(){
+        return 10.0f/9.0f;
+    }
 }

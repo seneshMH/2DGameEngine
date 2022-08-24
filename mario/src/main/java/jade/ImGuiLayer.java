@@ -1,5 +1,6 @@
 package jade;
 
+import editor.GameViewWindow;
 import imgui.*;
 
 import imgui.callback.ImStrConsumer;
@@ -192,6 +193,7 @@ public class ImGuiLayer {
         setupDockSpace();
         currentScene.sceneImGui();
         ImGui.showDemoWindow();
+        GameViewWindow.imGui();
         ImGui.end();
         ImGui.render();
 
