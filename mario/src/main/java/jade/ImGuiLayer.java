@@ -123,7 +123,7 @@ public class ImGuiLayer {
                 ImGui.setWindowFocus(null);
             }
 
-            if(!io.getWantCaptureMouse()){
+            if(!io.getWantCaptureMouse() || GameViewWindow.getWantCaptureMouse()){
                 MouseListener.mouseButtonCallback(w,button,action,mods);
             }
         });
@@ -166,7 +166,7 @@ public class ImGuiLayer {
 
         // Fonts merge example
         fontConfig.setPixelSnapH(true);
-        fontAtlas.addFontFromFileTTF("assets/fonts/segoeui.ttf",32,fontConfig);
+        fontAtlas.addFontFromFileTTF("assets/fonts/segoeui.ttf",24,fontConfig);
 
 
 
