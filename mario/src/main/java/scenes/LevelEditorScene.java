@@ -30,14 +30,14 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init(){
+        this.camera = new Camera(new Vector2f());
         levelEditorStuff.addComponent(new MouseControls());
         levelEditorStuff.addComponent(new GridLines());
+        levelEditorStuff.addComponent(new EditorCamera(this.camera));
 
         loadResources();
-        this.camera = new Camera(new Vector2f());
 
         sprites = AssetPool.getSpriteSheet("assets/images/spritesheets/decorationsAndBlocks.png");
-
 
        //obj1 = new GameObject("obj1" , new Transform(new Vector2f(100,100),new Vector2f(256,256)),-1);
        //SpriteRenderer objSprite = new SpriteRenderer();
@@ -87,6 +87,7 @@ public class LevelEditorScene extends Scene {
         x += 50 * dt;
         y += 50 * dt;
 
+        this.camera.adjustProjection();
         for (GameObject go : this.gameObjects){
             go.update(dt);
         }
