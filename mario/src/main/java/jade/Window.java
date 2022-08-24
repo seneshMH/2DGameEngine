@@ -3,11 +3,11 @@ package jade;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
-import renderer.DebugDraw;
-import renderer.FrameBuffer;
+import renderer.*;
 import scenes.LevelEditorScene;
 import scenes.LevelScene;
 import scenes.Scene;
+import util.AssetPool;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
@@ -28,6 +28,8 @@ public class Window {
     private ImGuiLayer imGuiLayer;
 
     private FrameBuffer frameBuffer;
+
+    private PickingTexture pickingTexture;
 
     private Window(){
         this.width  =1920;
@@ -135,14 +137,18 @@ public class Window {
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
 
-        this.imGuiLayer = new ImGuiLayer(glfwWindow);
-        this.imGuiLayer.initImGui();
-
         this.frameBuffer = new FrameBuffer(1920,1080);
+        this.pickingTexture = new PickingTexture(1920,1080);
+        glViewport(0,0,1920,1080);
+
+        this.imGuiLayer = new ImGuiLayer(glfwWindow,pickingTexture);
+        this.imGuiLayer.initImGui();
 
         window.changeScene(0);
 
     }
+
+
 
     public void loop(){
 
@@ -150,21 +156,43 @@ public class Window {
         float endTime;
         float dt = -1.0f;
 
+        Shader defaultShader = AssetPool.getShader("assets/shaders/default.glsl");
+        Shader pickingShader = AssetPool.getShader("assets/shaders/pickingShader.glsl");
 
         while (!glfwWindowShouldClose(glfwWindow)){
             //poll events
             glfwPollEvents();
 
+            //Render pass 1 : Render to picking texture
+            glDisable(GL_BLEND);
+            pickingTexture.enableWriting();
+
+            glViewport(0,0,1920,1080);
+            glClearColor(0.0f,0.0f,0.0f,0.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            Renderer.bindShader(pickingShader);
+            currentScene.render();
+
+            pickingTexture.disableWriting();
+            glEnable(GL_BLEND);
+
+            //Render pass 2 : Render actual game
+
             DebugDraw.beginFrame();
+
+            this.frameBuffer.bind();
 
             glClearColor(1.0f,1.0f,1.0f,1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            //this.frameBuffer.bind();
+
 
             if(dt >= 0) {
                 DebugDraw.draw();
+                Renderer.bindShader(defaultShader);
                 currentScene.update(dt);
+                currentScene.render();
                 glfwSetWindowTitle(glfwWindow, title + " FPS : " + Math.round(1.0f / dt));
             }
 
@@ -198,4 +226,11 @@ public class Window {
     }
 
 
+    public static FrameBuffer getFrameBuffer() {
+        return get().frameBuffer;
+    }
+
+    public static float getTargetAspectRatio(){
+        return 10.0f/9.0f;
+    }
 }
