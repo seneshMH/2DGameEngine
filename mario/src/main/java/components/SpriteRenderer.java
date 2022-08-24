@@ -42,7 +42,8 @@ public class SpriteRenderer extends Component {
     }
 
     @Override
-    public void imGui(){
+    public void
+    imGui(){
         float[] imColor = {color.x,color.y,color.z,color.w};
         if(ImGui.colorPicker4("color picker",imColor)){
             this.color.set(imColor[0],imColor[1],imColor[2],imColor[3]);
@@ -80,5 +81,9 @@ public class SpriteRenderer extends Component {
 
     public void setClear(){
         this.isDirty = false;
+    }
+
+    public void setTexture(Texture texture){
+        this.sprite.setTexture(texture);
     }
 }
