@@ -175,8 +175,8 @@
         "type": "components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 1.0,
-            "y": 1.0,
+            "x": 0.0,
+            "y": 0.116449356,
             "z": 1.0,
             "w": 1.0
           },
@@ -231,9 +231,9 @@
         "type": "components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
+            "x": 0.9054545,
+            "y": 0.21730909,
+            "z": 0.21730909,
             "w": 1.0
           },
           "sprite": {
