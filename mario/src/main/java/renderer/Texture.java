@@ -10,12 +10,9 @@ import static org.lwjgl.stb.STBImage.*;
 
 public class Texture {
     private String filePath;
-    private int texID;
+    private transient int texID;
     private int width,height;
 
-   //public Texture(String filePath){
-
-   //}
     public Texture(){
         texID = -1;
         width = -1;
