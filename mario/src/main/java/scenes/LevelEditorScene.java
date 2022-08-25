@@ -18,7 +18,7 @@ public class LevelEditorScene extends Scene {
     GameObject obj2;
     SpriteSheet sprites;
 
-    GameObject levelEditorStuff = new GameObject("levelEditor",new Transform(new Vector2f()),0);
+    GameObject levelEditorStuff = this.createGameObject("levelEditor");
     //MouseControls mouseControls = new MouseControls();
 
     public LevelEditorScene(){

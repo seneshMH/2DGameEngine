@@ -4,63 +4,21 @@
     "name": "sprite object gen",
     "components": [
       {
-        "type": "components.SpriteRenderer",
+        "type": "jade.Transform",
         "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
+          "position": {
+            "x": 571.0497,
+            "y": 434.45255
           },
-          "sprite": {
-            "width": 16.0,
-            "height": 16.0,
-            "texture": {
-              "filePath": "assets/images/spritesheets/decorationsAndBlocks.png",
-              "width": 112,
-              "height": 192
-            },
-            "texCoords": [
-              {
-                "x": 1.0,
-                "y": 0.9166667
-              },
-              {
-                "x": 1.0,
-                "y": 0.8333333
-              },
-              {
-                "x": 0.85714287,
-                "y": 0.8333333
-              },
-              {
-                "x": 0.85714287,
-                "y": 0.9166667
-              }
-            ]
+          "scale": {
+            "x": 170.94171,
+            "y": 167.16296
           },
-          "uid": 8
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 19
         }
-      }
-    ],
-    "transform": {
-      "position": {
-        "x": 510.1333,
-        "y": 463.10455
       },
-      "scale": {
-        "x": 58.051636,
-        "y": 112.66168
-      },
-      "rotation": 0.0
-    },
-    "zIndex": 0,
-    "doSerialization": true
-  },
-  {
-    "uid": 2,
-    "name": "sprite object gen",
-    "components": [
       {
         "type": "components.SpriteRenderer",
         "properties": {
@@ -80,45 +38,49 @@
             },
             "texCoords": [
               {
-                "x": 1.0,
+                "x": 0.85714287,
                 "y": 0.9166667
               },
               {
-                "x": 1.0,
-                "y": 0.8333333
-              },
-              {
                 "x": 0.85714287,
                 "y": 0.8333333
               },
               {
-                "x": 0.85714287,
+                "x": 0.71428573,
+                "y": 0.8333333
+              },
+              {
+                "x": 0.71428573,
                 "y": 0.9166667
               }
             ]
           },
-          "uid": 9
+          "uid": 20
         }
       }
     ],
-    "transform": {
-      "position": {
-        "x": 576.0,
-        "y": 7358.494
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      },
-      "rotation": 0.0
-    },
-    "zIndex": 0,
     "doSerialization": true
   },
   {
-    "uid": 7,
+    "uid": 6,
     "name": "sprite object gen",
     "components": [
+      {
+        "type": "jade.Transform",
+        "properties": {
+          "position": {
+            "x": 542.87103,
+            "y": 256.0
+          },
+          "scale": {
+            "x": 32.0,
+            "y": 32.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 39
+        }
+      },
       {
         "type": "components.SpriteRenderer",
         "properties": {
@@ -138,97 +100,27 @@
             },
             "texCoords": [
               {
-                "x": 0.14285715,
+                "x": 0.85714287,
+                "y": 0.9166667
+              },
+              {
+                "x": 0.85714287,
                 "y": 0.8333333
               },
               {
-                "x": 0.14285715,
-                "y": 0.75
-              },
-              {
-                "x": 0.0,
-                "y": 0.75
-              },
-              {
-                "x": 0.0,
+                "x": 0.71428573,
                 "y": 0.8333333
+              },
+              {
+                "x": 0.71428573,
+                "y": 0.9166667
               }
             ]
           },
-          "uid": 24
+          "uid": 40
         }
       }
     ],
-    "transform": {
-      "position": {
-        "x": 576.0,
-        "y": -96.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      },
-      "rotation": 0.0
-    },
-    "zIndex": 0,
-    "doSerialization": true
-  },
-  {
-    "uid": 8,
-    "name": "sprite object gen",
-    "components": [
-      {
-        "type": "components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16.0,
-            "height": 16.0,
-            "texture": {
-              "filePath": "assets/images/spritesheets/decorationsAndBlocks.png",
-              "width": 112,
-              "height": 192
-            },
-            "texCoords": [
-              {
-                "x": 0.14285715,
-                "y": 0.8333333
-              },
-              {
-                "x": 0.14285715,
-                "y": 0.75
-              },
-              {
-                "x": 0.0,
-                "y": 0.75
-              },
-              {
-                "x": 0.0,
-                "y": 0.8333333
-              }
-            ]
-          },
-          "uid": 25
-        }
-      }
-    ],
-    "transform": {
-      "position": {
-        "x": 701.52515,
-        "y": 480.3114
-      },
-      "scale": {
-        "x": 119.70685,
-        "y": 132.28223
-      },
-      "rotation": 0.0
-    },
-    "zIndex": 0,
     "doSerialization": true
   }
 ]

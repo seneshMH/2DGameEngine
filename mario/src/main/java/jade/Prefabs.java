@@ -7,8 +7,9 @@ import org.joml.Vector2f;
 public class Prefabs {
 
     public static GameObject generateSpriteObjects(Sprite sprite,float sizeX,float sizeY){
-        GameObject block = new GameObject("sprite object gen",
-                new Transform(new Vector2f(),new Vector2f(sizeX,sizeY)),0);
+        GameObject block = Window.getScene().createGameObject("sprite object gen");
+        block.transform.scale.x = sizeX;
+        block.transform.scale.y = sizeY;
 
         SpriteRenderer renderer = new SpriteRenderer();
         renderer.setSprite(sprite);
