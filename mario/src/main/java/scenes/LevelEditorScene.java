@@ -4,10 +4,7 @@ package scenes;
 import components.*;
 import imgui.ImGui;
 import imgui.ImVec2;
-import jade.Camera;
-import jade.GameObject;
-import jade.Prefabs;
-import jade.Transform;
+import jade.*;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -30,14 +27,20 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init(){
+        loadResources();
+        sprites = AssetPool.getSpriteSheet("assets/images/spritesheets/decorationsAndBlocks.png");
+        SpriteSheet gizmos = AssetPool.getSpriteSheet("assets/images/gizmos.png");
+
         this.camera = new Camera(new Vector2f());
         levelEditorStuff.addComponent(new MouseControls());
         levelEditorStuff.addComponent(new GridLines());
         levelEditorStuff.addComponent(new EditorCamera(this.camera));
+        levelEditorStuff.addComponent(new TranslateGizmo(gizmos.getSprite(1),
+                Window.getImGuiLayer().getPropertiesWindow()));
 
-        loadResources();
+        levelEditorStuff.start();
 
-        sprites = AssetPool.getSpriteSheet("assets/images/spritesheets/decorationsAndBlocks.png");
+
 
        //obj1 = new GameObject("obj1" , new Transform(new Vector2f(100,100),new Vector2f(256,256)),-1);
        //SpriteRenderer objSprite = new SpriteRenderer();
@@ -66,6 +69,10 @@ public class LevelEditorScene extends Scene {
         AssetPool.addSpriteSheet("assets/images/spritesheets/decorationsAndBlocks.png",
                 new SpriteSheet(AssetPool.getTexture("assets/images/spritesheets/decorationsAndBlocks.png")
                 ,16,16,81,0));
+
+        AssetPool.addSpriteSheet("assets/images/gizmos.png",
+                new SpriteSheet(AssetPool.getTexture("assets/images/gizmos.png"),
+                        24,48,2,0));
 
         for (GameObject g : gameObjects){
             if(g.getComponent(SpriteRenderer.class) != null){
@@ -100,6 +107,10 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void imGui(){
+        ImGui.begin("Level Editor Stuff");
+        levelEditorStuff.imGui();
+        ImGui.end();
+
         ImGui.begin("Test");
 
         ImVec2 windowPos = new ImVec2();

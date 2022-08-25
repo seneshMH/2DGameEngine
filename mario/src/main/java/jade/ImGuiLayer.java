@@ -267,4 +267,8 @@ public class ImGuiLayer {
 
 
     }
+
+    public PropertiesWindow getPropertiesWindow(){
+        return this.propertiesWindow;
+    }
 }
