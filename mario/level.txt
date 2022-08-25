@@ -124,7 +124,7 @@
     "doSerialization": true
   },
   {
-    "uid": 7,
+    "uid": 3,
     "name": "sprite object gen",
     "components": [
       {
@@ -186,7 +186,7 @@
     "doSerialization": true
   },
   {
-    "uid": 8,
+    "uid": 4,
     "name": "sprite object gen",
     "components": [
       {
@@ -248,7 +248,7 @@
     "doSerialization": true
   },
   {
-    "uid": 9,
+    "uid": 5,
     "name": "sprite object gen",
     "components": [
       {
@@ -310,7 +310,7 @@
     "doSerialization": true
   },
   {
-    "uid": 10,
+    "uid": 6,
     "name": "sprite object gen",
     "components": [
       {
