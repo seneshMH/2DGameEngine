@@ -3,6 +3,7 @@ package jade;
 import editor.GameViewWindow;
 import editor.MenuBar;
 import editor.PropertiesWindow;
+import editor.SceneHierarchyWindow;
 import imgui.*;
 
 import imgui.callback.ImStrConsumer;
@@ -32,12 +33,14 @@ public class ImGuiLayer {
     private GameViewWindow gameViewWindow;
     private PropertiesWindow propertiesWindow;
     private MenuBar menuBar;
+    private SceneHierarchyWindow sceneHierarchyWindow;
 
     public ImGuiLayer(long glfwWindow, PickingTexture pickingTexture){
         this.glfwWindow = glfwWindow;
         this.gameViewWindow = new GameViewWindow();
         this.propertiesWindow = new PropertiesWindow(pickingTexture);
         this.menuBar = new MenuBar();
+        this.sceneHierarchyWindow = new SceneHierarchyWindow();
     }
 
     public void initImGui() {
@@ -170,6 +173,7 @@ public class ImGuiLayer {
         gameViewWindow.imGui();
         propertiesWindow.update(dt,currentScene);
         propertiesWindow.imGui();
+        sceneHierarchyWindow.imGui();
 
 
         endFrame();
