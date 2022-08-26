@@ -199,8 +199,8 @@ public class ImGuiLayer {
         ImGui.updatePlatformWindows();
         ImGui.renderPlatformWindowsDefault();
         glfwMakeContextCurrent(backupWindowPtr);
+        */
 
-         */
 
 
     }
@@ -219,7 +219,7 @@ public class ImGuiLayer {
         ImGui.setNextWindowPos(mainViewPort.getWorkPosX(),mainViewPort.getWorkPosY());
         ImGui.setNextWindowSize(mainViewPort.getWorkSizeX(),mainViewPort.getWorkSizeY());
         ImGui.setNextWindowViewport(mainViewPort.getID());
-         */
+        */
 
 
         ImGui.setWindowPos(0.0f,0.0f);
