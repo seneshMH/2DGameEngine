@@ -2,6 +2,7 @@ package components;
 
 import editor.JImGui;
 import imgui.ImGui;
+import imgui.type.ImInt;
 import jade.GameObject;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -70,6 +71,13 @@ public abstract class Component {
                     if (ImGui.dragFloat4(name + ": ", imVec)) {
                         val.set(imVec[0], imVec[1], imVec[2],imVec[3]);
                     }
+                } else if (type.isEnum()) {
+                    String[] enumValue = getEnumValue(type);
+                    String enumType = ((Enum)value).name();
+                    ImInt index = new ImInt(indexOf(enumType,enumValue));
+                    if(ImGui.combo(field.getName(),index,enumValue,enumValue.length)){
+                        field.set(this,type.getEnumConstants()[index.get()]);
+                    }
                 }
 
                 if(isPrivate){
@@ -85,6 +93,25 @@ public abstract class Component {
         if(this.uid == -1){
             this.uid = ID_COUNTER ++;
         }
+    }
+
+    private <T extends Enum<T>> String[] getEnumValue(Class<T> enumType){
+        String[] enumValues = new String[enumType.getEnumConstants().length];
+        int i = 0;
+        for (T enumIntValue : enumType.getEnumConstants()){
+            enumValues[i] = enumIntValue.name();
+            i++;
+        }
+        return enumValues;
+    }
+
+    private int indexOf(String str,String[] arr){
+        for(int i=0;i<arr.length;i++){
+            if(str.equals(arr[i])){
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void destroy(){

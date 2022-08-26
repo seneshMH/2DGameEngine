@@ -46,10 +46,13 @@ public class RenderBatch implements Comparable<RenderBatch>{
     private int maxBatchSize;
     private int zIndex;
 
-    public RenderBatch(int maxBatchSize,int zIndex){
+    private Renderer renderer;
+
+    public RenderBatch(int maxBatchSize,int zIndex,Renderer renderer){
         this.zIndex = zIndex;
         this.sprites = new SpriteRenderer[maxBatchSize];
         this.maxBatchSize = maxBatchSize;
+        this.renderer = renderer;
 
         //4 vertices quad
         vertices = new float[maxBatchSize * 4 * VERTEX_SIZE];
@@ -121,6 +124,13 @@ public class RenderBatch implements Comparable<RenderBatch>{
                 spr.setClear();
                 reBufferData = true;
             }
+
+            if(spr.gameObject.transform.zIndex != this.zIndex){
+                destroyIfExists(spr.gameObject);
+                renderer.add(spr.gameObject);
+            }
+
+
         }
 
         if(reBufferData){
@@ -194,15 +204,15 @@ public class RenderBatch implements Comparable<RenderBatch>{
 
 
         //Add vertices with the appropriate properties
-        float xAdd = 1.0f;
-        float yAdd = 1.0f;
+        float xAdd = 0.5f;
+        float yAdd = 0.5f;
         for (int i = 0;i < 4; i++){
             if (i == 1){
-                yAdd = 0.0f;
+                yAdd = -0.5f;
             } else if (i == 2) {
-                xAdd = 0.0f;
+                xAdd = -0.5f;
             }else if (i == 3) {
-                yAdd = 1.0f;
+                yAdd = 0.5f;
             }
 
             Vector4f currentPos = new Vector4f(sprite.gameObject.transform.position.x + (xAdd * sprite.gameObject.transform.scale.x),
@@ -269,7 +279,7 @@ public class RenderBatch implements Comparable<RenderBatch>{
         SpriteRenderer sprite = go.getComponent(SpriteRenderer.class);
         for (int i=0;i<numSprites;i++){
             if(sprites[i] == sprite){
-                for (int j=i;j<numSprites;j++){
+                for (int j=i;j<numSprites - 1;j++){
                     sprites[j] = sprites[j + 1];
                     sprites[j].setDirty();
                 }
