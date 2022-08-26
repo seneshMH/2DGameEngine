@@ -54,7 +54,7 @@ public class ImGuiLayer {
 
         io.setIniFilename("ImGui.ini"); // We don't want to save .ini file
         io.setConfigFlags(ImGuiConfigFlags.DockingEnable);
-        //io.setConfigFlags(ImGuiConfigFlags.ViewportsEnable);
+        //io.addConfigFlags(ImGuiConfigFlags.ViewportsEnable);
         io.setBackendPlatformName("imgui_java_impl_glfw");
 
 
@@ -201,6 +201,8 @@ public class ImGuiLayer {
         glfwMakeContextCurrent(backupWindowPtr);
 
          */
+
+
     }
 
     // If you want to clean a room after yourself - do it by yourself
@@ -217,7 +219,8 @@ public class ImGuiLayer {
         ImGui.setNextWindowPos(mainViewPort.getWorkPosX(),mainViewPort.getWorkPosY());
         ImGui.setNextWindowSize(mainViewPort.getWorkSizeX(),mainViewPort.getWorkSizeY());
         ImGui.setNextWindowViewport(mainViewPort.getID());
-           */
+         */
+
 
         ImGui.setWindowPos(0.0f,0.0f);
         ImGui.setNextWindowSize(Window.getWidth() ,Window.getHeight());
