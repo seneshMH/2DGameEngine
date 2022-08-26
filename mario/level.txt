@@ -1,14 +1,14 @@
 [
   {
-    "uid": 0,
+    "uid": 36,
     "name": "sprite object gen",
     "components": [
       {
         "type": "jade.Transform",
         "properties": {
           "position": {
-            "x": 2.1539588,
-            "y": 1.75
+            "x": 1.1554248,
+            "y": 2.2589056
           },
           "scale": {
             "x": 0.25,
@@ -97,14 +97,14 @@
     "isDead": false
   },
   {
-    "uid": 1,
+    "uid": 37,
     "name": "sprite object gen",
     "components": [
       {
         "type": "jade.Transform",
         "properties": {
           "position": {
-            "x": 1.9284458,
+            "x": 1.0794725,
             "y": 1.2240459
           },
           "scale": {
@@ -194,7 +194,7 @@
     "isDead": false
   },
   {
-    "uid": 7,
+    "uid": 38,
     "name": "sprite object gen",
     "components": [
       {
@@ -250,6 +250,85 @@
             ]
           },
           "uid": 81
+        }
+      }
+    ],
+    "doSerialization": true,
+    "isDead": false
+  },
+  {
+    "uid": 39,
+    "name": "sprite object gen",
+    "components": [
+      {
+        "type": "jade.Transform",
+        "properties": {
+          "position": {
+            "x": 4.136363,
+            "y": 1.708652
+          },
+          "scale": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 101
+        }
+      },
+      {
+        "type": "components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 16.0,
+            "height": 16.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/decorationsAndBlocks.png",
+              "width": 112,
+              "height": 192
+            },
+            "texCoords": [
+              {
+                "x": 1.0,
+                "y": 1.0
+              },
+              {
+                "x": 1.0,
+                "y": 0.9166667
+              },
+              {
+                "x": 0.85714287,
+                "y": 0.9166667
+              },
+              {
+                "x": 0.85714287,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 102
+        }
+      },
+      {
+        "type": "physics2D.components.RigidBody2D",
+        "properties": {
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "angularDamping": 0.8,
+          "linearDamping": 0.9,
+          "mass": 0.0,
+          "bodyType": "Dynamic",
+          "fixedRotation": false,
+          "continuousCollision": true,
+          "uid": 103
         }
       }
     ],
