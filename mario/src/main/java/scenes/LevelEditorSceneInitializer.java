@@ -8,6 +8,10 @@ import jade.*;
 import org.joml.Vector2f;
 import util.AssetPool;
 
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.Collection;
+
 public class LevelEditorSceneInitializer extends SceneInitializer {
 
     SpriteSheet sprites;
@@ -52,6 +56,23 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
         AssetPool.addSpriteSheet("assets/images/gizmos.png",
                 new SpriteSheet(AssetPool.getTexture("assets/images/gizmos.png"),
                         24,48,3,0));
+
+
+        AssetPool.addSound("assets/sounds/main-theme-overworld.ogg", true);
+        AssetPool.addSound("assets/sounds/flagpole.ogg", false);
+        AssetPool.addSound("assets/sounds/break_block.ogg", false);
+        AssetPool.addSound("assets/sounds/bump.ogg", false);
+        AssetPool.addSound("assets/sounds/coin.ogg", false);
+        AssetPool.addSound("assets/sounds/gameover.ogg", false);
+        AssetPool.addSound("assets/sounds/jump-small.ogg", false);
+        AssetPool.addSound("assets/sounds/mario_die.ogg", false);
+        AssetPool.addSound("assets/sounds/pipe.ogg", false);
+        AssetPool.addSound("assets/sounds/powerup.ogg", false);
+        AssetPool.addSound("assets/sounds/powerup_appears.ogg", false);
+        AssetPool.addSound("assets/sounds/stage_clear.ogg", false);
+        AssetPool.addSound("assets/sounds/stomp.ogg", false);
+        AssetPool.addSound("assets/sounds/kick.ogg", false);
+        AssetPool.addSound("assets/sounds/invincible.ogg", false);
 
         for (GameObject g : scene.getGameObjects()){
             if(g.getComponent(SpriteRenderer.class) != null){
@@ -146,6 +167,26 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
                 ImGui.sameLine();
 
                 ImGui.endTabItem();
+            }
+
+            if(ImGui.beginTabItem("Sounds")){
+                Collection<Sound> sounds = AssetPool.getAllSounds();
+                for (Sound sound : sounds){
+                    File tmp = new File(sound.getFilePath());
+                    if(ImGui.button(tmp.getName())){
+                        if(!sound.isPlaying()){
+                            sound.play();
+                        }else{
+                            sound.stop();
+                        }
+                    }
+                    if (ImGui.getContentRegionAvailX() > 100){
+                        ImGui.sameLine();
+                    }
+                }
+
+                ImGui.endTabItem();
+
             }
 
 
