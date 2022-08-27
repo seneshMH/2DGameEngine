@@ -3,6 +3,7 @@ package jade;
 import editor.GameViewWindow;
 import editor.MenuBar;
 import editor.PropertiesWindow;
+import editor.SceneHierarchyWindow;
 import imgui.*;
 
 import imgui.callback.ImStrConsumer;
@@ -32,12 +33,14 @@ public class ImGuiLayer {
     private GameViewWindow gameViewWindow;
     private PropertiesWindow propertiesWindow;
     private MenuBar menuBar;
+    private SceneHierarchyWindow sceneHierarchyWindow;
 
     public ImGuiLayer(long glfwWindow, PickingTexture pickingTexture){
         this.glfwWindow = glfwWindow;
         this.gameViewWindow = new GameViewWindow();
         this.propertiesWindow = new PropertiesWindow(pickingTexture);
         this.menuBar = new MenuBar();
+        this.sceneHierarchyWindow = new SceneHierarchyWindow();
     }
 
     public void initImGui() {
@@ -50,8 +53,8 @@ public class ImGuiLayer {
         final ImGuiIO io = ImGui.getIO();
 
         io.setIniFilename("ImGui.ini"); // We don't want to save .ini file
-        io.setConfigFlags(ImGuiConfigFlags.DockingEnable);
-        //io.setConfigFlags(ImGuiConfigFlags.ViewportsEnable);
+        io.addConfigFlags(ImGuiConfigFlags.DockingEnable);
+        io.addConfigFlags(ImGuiConfigFlags.ViewportsEnable);
         io.setBackendPlatformName("imgui_java_impl_glfw");
 
 
@@ -106,7 +109,9 @@ public class ImGuiLayer {
             io.setMouseWheelH(io.getMouseWheelH() + (float) xOffset);
             io.setMouseWheel(io.getMouseWheel() + (float) yOffset);
 
-            MouseListener.mouseScrollCallback(w,xOffset,yOffset);
+            if(!io.getWantCaptureMouse() || gameViewWindow.getWantCaptureMouse()) {
+                MouseListener.mouseScrollCallback(w, xOffset, yOffset);
+            }
         });
 
         io.setSetClipboardTextFn(new ImStrConsumer() {
@@ -170,6 +175,7 @@ public class ImGuiLayer {
         gameViewWindow.imGui();
         propertiesWindow.update(dt,currentScene);
         propertiesWindow.imGui();
+        sceneHierarchyWindow.imGui();
 
 
         endFrame();
@@ -190,13 +196,15 @@ public class ImGuiLayer {
         ImGui.render();
         imGuiGl3.renderDrawData(ImGui.getDrawData());
 
-        /*
+
         long backupWindowPtr = glfwGetCurrentContext();
         ImGui.updatePlatformWindows();
         ImGui.renderPlatformWindowsDefault();
         glfwMakeContextCurrent(backupWindowPtr);
 
-         */
+
+
+
     }
 
     // If you want to clean a room after yourself - do it by yourself
@@ -208,12 +216,13 @@ public class ImGuiLayer {
     private void setupDockSpace(){
         int windowFlags = ImGuiWindowFlags.MenuBar | ImGuiWindowFlags.NoDocking;
 
-        /*
+
         ImGuiViewport mainViewPort = ImGui.getMainViewport();
         ImGui.setNextWindowPos(mainViewPort.getWorkPosX(),mainViewPort.getWorkPosY());
         ImGui.setNextWindowSize(mainViewPort.getWorkSizeX(),mainViewPort.getWorkSizeY());
         ImGui.setNextWindowViewport(mainViewPort.getID());
-           */
+
+
 
         ImGui.setWindowPos(0.0f,0.0f);
         ImGui.setNextWindowSize(Window.getWidth() ,Window.getHeight());

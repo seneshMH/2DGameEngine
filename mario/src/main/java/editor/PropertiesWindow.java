@@ -26,7 +26,7 @@ public class PropertiesWindow {
 
         debounce -= dt;
 
-        if(MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_LEFT) && debounce < 0){
+        if(!MouseListener.isDragging() && MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_LEFT) && debounce < 0){
             int x = (int) MouseListener.getScreenX();
             int y = (int) MouseListener.getScreenY();
 
