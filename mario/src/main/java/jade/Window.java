@@ -204,7 +204,7 @@ public class Window implements Observer {
 
 
             if(dt >= 0) {
-                DebugDraw.draw();
+
                 Renderer.bindShader(defaultShader);
                 if (isRuntimePlay) {
                     currentScene.update(dt);
@@ -212,16 +212,17 @@ public class Window implements Observer {
                     currentScene.editorUpdate(dt);
                 }
                 currentScene.render();
-                glfwSetWindowTitle(glfwWindow, title + " FPS : " + Math.round(1.0f / dt));
+                DebugDraw.draw();
+                //glfwSetWindowTitle(glfwWindow, title + " FPS : " + Math.round(1.0f / dt));
             }
 
             this.frameBuffer.unBind();
 
             this.imGuiLayer.update(dt,currentScene);
 
+            MouseListener.endFrame();
             glfwSwapBuffers(glfwWindow);
 
-            MouseListener.endFrame();
 
             endTime = (float) glfwGetTime();
             dt = endTime - beginTime;
@@ -231,11 +232,11 @@ public class Window implements Observer {
     }
 
     public static int getWidth(){
-        return get().width;
+        return 1920;//get().width;
     }
 
     public static int getHeight(){
-        return get().height;
+        return 1080;//get().height;
     }
 
     public static void setWidth(int newWidth){
