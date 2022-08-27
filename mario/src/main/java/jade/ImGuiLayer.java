@@ -53,8 +53,8 @@ public class ImGuiLayer {
         final ImGuiIO io = ImGui.getIO();
 
         io.setIniFilename("ImGui.ini"); // We don't want to save .ini file
-        io.setConfigFlags(ImGuiConfigFlags.DockingEnable);
-        //io.addConfigFlags(ImGuiConfigFlags.ViewportsEnable);
+        io.addConfigFlags(ImGuiConfigFlags.DockingEnable);
+        io.addConfigFlags(ImGuiConfigFlags.ViewportsEnable);
         io.setBackendPlatformName("imgui_java_impl_glfw");
 
 
@@ -194,12 +194,12 @@ public class ImGuiLayer {
         ImGui.render();
         imGuiGl3.renderDrawData(ImGui.getDrawData());
 
-        /*
+
         long backupWindowPtr = glfwGetCurrentContext();
         ImGui.updatePlatformWindows();
         ImGui.renderPlatformWindowsDefault();
         glfwMakeContextCurrent(backupWindowPtr);
-        */
+
 
 
 
@@ -214,12 +214,12 @@ public class ImGuiLayer {
     private void setupDockSpace(){
         int windowFlags = ImGuiWindowFlags.MenuBar | ImGuiWindowFlags.NoDocking;
 
-        /*
+
         ImGuiViewport mainViewPort = ImGui.getMainViewport();
         ImGui.setNextWindowPos(mainViewPort.getWorkPosX(),mainViewPort.getWorkPosY());
         ImGui.setNextWindowSize(mainViewPort.getWorkSizeX(),mainViewPort.getWorkSizeY());
         ImGui.setNextWindowViewport(mainViewPort.getID());
-        */
+
 
 
         ImGui.setWindowPos(0.0f,0.0f);
