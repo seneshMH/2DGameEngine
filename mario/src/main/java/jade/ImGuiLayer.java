@@ -43,6 +43,10 @@ public class ImGuiLayer {
         this.sceneHierarchyWindow = new SceneHierarchyWindow();
     }
 
+    public GameViewWindow getGameViewWindow(){
+        return this.gameViewWindow;
+    }
+
     public void initImGui() {
         // IMPORTANT!!
         // This line is critical for Dear ImGui to work.
@@ -111,6 +115,8 @@ public class ImGuiLayer {
 
             if(!io.getWantCaptureMouse() || gameViewWindow.getWantCaptureMouse()) {
                 MouseListener.mouseScrollCallback(w, xOffset, yOffset);
+            }else {
+                MouseListener.clear();
             }
         });
 
@@ -173,7 +179,6 @@ public class ImGuiLayer {
         currentScene.imGui();
         //ImGui.showDemoWindow();
         gameViewWindow.imGui();
-        propertiesWindow.update(dt,currentScene);
         propertiesWindow.imGui();
         sceneHierarchyWindow.imGui();
 
